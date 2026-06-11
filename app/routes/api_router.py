@@ -1,11 +1,11 @@
 from fastapi import APIRouter
-from app.services.generate_logic import Generatelogic
+from app.services.generate_logic import Generateservice
 from app.models.generate import GenerateRequest, GenerateResponse 
 
 router=APIRouter()
-services=Generatelogic()
+services=Generateservice()
 
 @router.post("/generate", response_model=GenerateResponse)
 async def generate(req: GenerateRequest):
-    result = await services.ser(req.prompt)
+    result = await services.m_services(req.prompt)
     return {"response" : result}

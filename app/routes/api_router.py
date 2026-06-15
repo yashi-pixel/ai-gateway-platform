@@ -7,5 +7,8 @@ services=Generateservice()
 
 @router.post("/generate", response_model=GenerateResponse)
 async def generate(req: GenerateRequest):
-    result = await services.m_services(req.prompt)
-    return {"response" : result}
+    try:
+       result = await services.m_services(req.prompt)
+       return {"response" : result}
+    except:
+           

@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from app.services.generate_logic import Generateservice
 from app.models.generate import GenerateRequest, GenerateResponse 
 
@@ -10,5 +10,9 @@ async def generate(req: GenerateRequest):
     try:
        result = await services.m_services(req.prompt)
        return {"response" : result}
-    except:
+    except Exception:
+        raise  HTTPException(
+            status_code=503,
+            detail="Provider temporarily unavailable. Please try again later.",
+        )
            
